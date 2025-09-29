@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TravelFlow.iml" filepath="$PROJECT_DIR$/TravelFlow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TravelFlowFrontend.iml" filepath="$PROJECT_DIR$/TravelFlowFrontend.iml" />
+    </modules>
+  </component>
+</project>
