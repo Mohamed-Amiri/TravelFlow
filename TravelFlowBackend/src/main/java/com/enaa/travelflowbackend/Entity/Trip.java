@@ -13,6 +13,7 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String destination;
     private String date;
     private double price;
@@ -49,6 +50,12 @@ public class Trip {
     }
 
     public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Trip(String destination, String date, double price) {
+        this.destination = destination;
+        this.date = date;
         this.price = price;
     }
 

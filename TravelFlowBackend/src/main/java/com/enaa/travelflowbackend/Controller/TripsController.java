@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
     @RestController
-    @RequestMapping("/api") // Base URL
+    @RequestMapping("/api")
     public class TripsController {
         @Autowired
         private final TripService tripService;
