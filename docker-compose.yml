@@ -1,0 +1,45 @@
+services:
+  travel-flow-db:
+    image: mysql
+    container_name: travel-flow-container-db
+    ports:
+      - "3307:3306"
+    networks:
+      - travel-flow-net
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: TravelFlow
+    volumes:
+      - travel-flow-vol:/var/lib/mysql
+
+
+  travel-flow-app:
+    build:
+      context: ./TravelFlowBackend
+    image: travel-flow-app-img
+    container_name: travel-flow-container-app
+    ports:
+      - "8081:8081"
+    depends_on:
+      - travel-flow-db
+    networks:
+      - travel-flow-net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://travel-flow-db:3306/mybatis_crud_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+networks:
+  travel-flow-net:
+    driver: bridge
+
+
+volumes:
+  travel-flow-vol:
