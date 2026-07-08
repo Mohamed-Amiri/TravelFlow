@@ -11,7 +11,7 @@ public interface AdminService {
 
     void promoteUserToAdmin(Long userId);
 
-    void deleteUser(Long userId);
+    void deleteUser(Long userId, Long currentUserId);
 
     StatsResponse getStatistics();
 }

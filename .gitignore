@@ -1,4 +1,4 @@
-
+# AI coding assistant rules
 .clinerules/byterover-rules.md
 .kilocode/rules/byterover-rules.md
 .roo/rules/byterover-rules.md
@@ -7,3 +7,21 @@
 .kiro/steering/byterover-rules.md
 .qoder/rules/byterover-rules.md
 .augment/rules/byterover-rules.md
+
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+
+# Build
+target/
+*.class
+*.jar
+*.war
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

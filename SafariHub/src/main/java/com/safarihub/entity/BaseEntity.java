@@ -7,13 +7,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 /**
- * Shared base for all entities: auto-generated id and audit timestamps.
+ * Shared base for all entities: auto-generated id, optimistic-lock version, and audit timestamps.
  */
 @Getter
 @Setter
@@ -23,6 +24,9 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    private Long version;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

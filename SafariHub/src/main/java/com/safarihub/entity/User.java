@@ -7,7 +7,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString(exclude = {"password", "reservations", "reviews", "favorites"})
 public class User extends BaseEntity {
 
@@ -37,6 +35,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @Column(nullable = false, length = 100)
     private String password;
 

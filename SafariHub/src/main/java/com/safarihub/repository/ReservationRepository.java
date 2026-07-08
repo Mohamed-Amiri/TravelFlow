@@ -19,4 +19,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAllByUserIdOrderByCreatedAtDesc(Long userId);
 
     long countByStatus(ReservationStatus status);
+
+    long countByTripIdAndStatus(Long tripId, ReservationStatus status);
 }

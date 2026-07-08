@@ -90,17 +90,21 @@ CREATE DATABASE TravelFlow;
 
 ### 2. Configure Application
 
-Edit `TravelFlowBackend/src/main/resources/application.properties`:
+The app uses Spring profiles. `application-dev.properties` (active by default) contains local
+development settings. To override secrets via environment variables, set them in your shell or IDE:
 
-```properties
-spring.datasource.username=root
-spring.datasource.password=your_password
+```bash
+export DB_PASSWORD=your_password
+export JWT_SECRET=your-256-bit-secret
+export ADMIN_PASSWORD=your-admin-password
 ```
+
+All configurable keys (with dev defaults) live in `SafariHub/src/main/resources/application.properties`.
 
 ### 3. Run Locally
 
 ```bash
-cd TravelFlowBackend
+cd SafariHub
 ./mvnw spring-boot:run
 ```
 
@@ -202,7 +206,7 @@ On first startup, a default admin is created:
 ## 📂 Folder Structure
 
 ```
-TravelFlowBackend/
+SafariHub/
 ├── src/main/java/com/safarihub/
 │   ├── config/                 # CORS, OpenAPI, properties, seeder
 │   ├── controller/             # REST API endpoints

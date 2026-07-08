@@ -4,9 +4,12 @@ import com.safarihub.dto.common.PagedResponse;
 import com.safarihub.dto.common.PaginationMeta;
 import com.safarihub.dto.trip.TripRequest;
 import com.safarihub.dto.trip.TripResponse;
+import com.safarihub.entity.ReservationStatus;
 import com.safarihub.entity.Trip;
+import com.safarihub.exception.BadRequestException;
 import com.safarihub.exception.ResourceNotFoundException;
 import com.safarihub.mapper.TripMapper;
+import com.safarihub.repository.ReservationRepository;
 import com.safarihub.repository.TripRepository;
 import com.safarihub.service.TripService;
 import jakarta.persistence.criteria.Predicate;
@@ -28,6 +31,7 @@ import java.util.List;
 public class TripServiceImpl implements TripService {
 
     private final TripRepository tripRepository;
+    private final ReservationRepository reservationRepository;
     private final TripMapper tripMapper;
 
     @Override
@@ -94,6 +98,11 @@ public class TripServiceImpl implements TripService {
         if (!tripRepository.existsById(id)) {
             throw new ResourceNotFoundException("Trip", String.valueOf(id));
         }
+
+        if (reservationRepository.countByTripIdAndStatus(id, ReservationStatus.CONFIRMED) > 0) {
+            throw new BadRequestException("Cannot delete trip with active reservations");
+        }
+
         tripRepository.deleteById(id);
         log.info("Trip deleted: id={}", id);
     }
