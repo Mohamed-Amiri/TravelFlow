@@ -3,6 +3,7 @@ package com.safarihub.controller;
 import com.safarihub.dto.admin.StatsResponse;
 import com.safarihub.dto.auth.UserResponse;
 import com.safarihub.dto.common.ApiResponse;
+import com.safarihub.security.SecurityUserResolver;
 import com.safarihub.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +27,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final SecurityUserResolver securityUserResolver;
 
     @Operation(summary = "List all users")
     @GetMapping("/users")
@@ -44,7 +46,8 @@ public class AdminController {
     @Operation(summary = "Delete a user")
     @DeleteMapping("/users/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {
-        adminService.deleteUser(id);
+        Long currentUserId = securityUserResolver.getCurrentUser().getId();
+        adminService.deleteUser(id, currentUserId);
         return ResponseEntity.ok(ApiResponse.success("User deleted", null));
     }
 

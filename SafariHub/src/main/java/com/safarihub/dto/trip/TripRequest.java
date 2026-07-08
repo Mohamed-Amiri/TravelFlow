@@ -1,5 +1,6 @@
 package com.safarihub.dto.trip;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -55,4 +56,10 @@ public class TripRequest {
 
     @Size(max = 60)
     private String category;
+
+    /** Cross-field validation: end date must be after start date (when both are present). */
+    @AssertTrue(message = "End date must be after start date")
+    public boolean isValidDateRange() {
+        return startDate == null || endDate == null || endDate.isAfter(startDate);
+    }
 }

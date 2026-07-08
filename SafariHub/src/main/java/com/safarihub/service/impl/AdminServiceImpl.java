@@ -58,7 +58,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void deleteUser(Long userId) {
+    public void deleteUser(Long userId, Long currentUserId) {
+        if (userId.equals(currentUserId)) {
+            throw new BadRequestException("You cannot delete your own account");
+        }
         if (!userRepository.existsById(userId)) {
             throw new ResourceNotFoundException("User", String.valueOf(userId));
         }

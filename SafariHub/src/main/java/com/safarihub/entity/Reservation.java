@@ -8,7 +8,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,14 +23,13 @@ import java.time.LocalDate;
 @Table(
         name = "reservations",
         uniqueConstraints = @UniqueConstraint(
-                name = "uk_reservation_user_trip",
-                columnNames = {"user_id", "trip_id"}
+                name = "uk_reservation_user_trip_status",
+                columnNames = {"user_id", "trip_id", "status"}
         )
 )
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString(exclude = {"user", "trip"})
 public class Reservation extends BaseEntity {
 

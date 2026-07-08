@@ -15,7 +15,7 @@ services:
 
   travel-flow-app:
     build:
-      context: ./TravelFlowBackend
+      context: ./SafariHub
     image: safarihub-app-img
     container_name: safarihub-app
     ports:
